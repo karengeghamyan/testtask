@@ -11,10 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return redirect('auth/login');
+// });
 
+Route::controllers([
+	'auth' => 'Auth\AuthController',
+	'password' => 'Auth\PasswordController',
+]);
+
+Route::group(['middleware' => 'auth'], function() {
+});
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -26,6 +33,10 @@ Route::get('/', function () {
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
-    //
+Route::group(['middleware' => 'web'], function () {
+    Route::auth();
+
+    Route::get('/home', 'HomeController@index');
+	Route::get('/', 'UsersController@index');
+	Route::get('/welcome', 'UsersController@index');
 });
