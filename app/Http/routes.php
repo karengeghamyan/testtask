@@ -36,13 +36,12 @@ Route::group(['middleware' => 'auth'], function() {
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
-    Route::get('/home', 'HomeController@index');
-	Route::get('/', 'UsersController@index');
-	Route::get('/welcome', 'UsersController@index');
+	Route::get('/', 'CodeTrackingController@index');
+	Route::get('/codes/delete/{id}', 'CodeTrackingController@destroy');
+	Route::resource('codes', 'CodeTrackingController');
 });
 
 // Route::get('/codes/edit/:id', 'CodeTrackingController@edit');
 // Route::get('/codes', 'CodeTrackingController@index');
 // Route::post('/codes', 'CodeTrackingController@store');
 // Route::get('/codes/delete/:id', 'CodeTrackingController@delete');
-Route::resource('codes', 'CodeTrackingController');

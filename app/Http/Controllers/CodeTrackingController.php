@@ -10,6 +10,11 @@ use App\Contracts\CodeTrackingServiceInterface;
 
 class CodeTrackingController extends Controller
 {
+
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -26,7 +31,7 @@ class CodeTrackingController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id, CodeTrackingServiceInterface $code_tracking_service)
-    {
+    {    	
     	return view('code_trackings.forms.edit', ['data' => $code_tracking_service->getTrackingCodeById($id)]);
     }
 
@@ -59,8 +64,11 @@ class CodeTrackingController extends Controller
      * @return Response
     */
     public function update($id, CodeTrackingServiceInterface $code_tracking_service, Request $request)
-    {
-    	$code_tracking_service->update($id, $request->all());
+    {    	
+    	if( null!== $code_tracking_service->update($id, $request->all()) )
+    	{
+    		return redirect()->back();
+    	}    	
     }
 
     /**
@@ -70,7 +78,10 @@ class CodeTrackingController extends Controller
      * @return Response
      */
     public function destroy($id, CodeTrackingServiceInterface $code_tracking_service)
-    {
-    	$code_tracking_service->delete($id);
+    {    	
+    	if( null!== $code_tracking_service->delete($id) )
+    	{
+    		return redirect()->back();
+    	}       	
     }
 }

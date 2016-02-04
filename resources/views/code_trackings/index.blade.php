@@ -13,7 +13,8 @@
 			<div class="tab-content">
 				<div role="tabpanel" class="tab-pane fade" id="add">
 					<h2>New tracking code</h2>
-					<form role="form" action="/codes" method="POST">
+					<form role="form" action="/codes" method="POST">						
+						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<div class="form-group">
 							<label for="name">Name:</label>
 							<input type="text" name="name" class="form-control" id="name" placeholder="Enter name">
@@ -62,7 +63,8 @@
 									<!-- <td>Anna</td> -->
 									<td>{!! $value->code !!}</td>
 									<td>
-										<a href="/codes/"></a>
+										<a href="/codes/{{ $value->id }}/edit">edit</a>
+										<a href="/codes/delete/{{ $value->id }}">delete</a>
 									</td>
 								</tr>							
 							@endforeach
