@@ -41,6 +41,16 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
+$app->singleton(
+    Illuminate\Contracts\Http\Kernel::class,
+    App\Http\Kernel::class
+);
+
+$app->singleton(
+    App\Contracts\CodeTrackingServiceInterface::class,
+    App\Services\CodeTrackingService::class
+);
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application

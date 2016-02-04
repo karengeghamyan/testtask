@@ -29,3 +29,9 @@ Route::get('/', function () {
 Route::group(['middleware' => ['web']], function () {
     //
 });
+
+// Route::get('/codes/edit/:id', 'CodeTrackingController@edit');
+// Route::get('/codes', 'CodeTrackingController@index');
+// Route::post('/codes', 'CodeTrackingController@store');
+// Route::get('/codes/delete/:id', 'CodeTrackingController@delete');
+Route::resource('codes', 'CodeTrackingController');
